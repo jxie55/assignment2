@@ -1,0 +1,18 @@
+B 2 C o m p i l a t i o n
+B 58 Equation Listing    SOLVE maximal_flow_problem Using LP From line 46
+D 59 obj
+D 65 flow_blance_on_node
+D 76 link_cap
+B 89 Column Listing      SOLVE maximal_flow_problem Using LP From line 46
+E 90 z
+E 98 f
+B 125 Model Statistics    SOLVE maximal_flow_problem Using LP From line 46
+B 141 Solution Report     SOLVE maximal_flow_problem Using LP From line 46
+F 170 obj
+F 178 flow_blance_on_node
+F 187 link_cap
+G 193 z
+G 197 f
+B 215 E x e c u t i o n
+I 216 f
+I 227 z

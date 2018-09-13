@@ -1,0 +1,23 @@
+B 2 C o m p i l a t i o n
+B 71 Equation Listing    SOLVE warehouse_facility_problem Using MIP From line 58
+D 72 obj
+D 78 demand_satifiscation
+D 89 suppy_faciliaty
+D 98 storage_capacity
+B 109 Column Listing      SOLVE warehouse_facility_problem Using MIP From line 58
+E 110 z
+E 118 x
+E 143 y
+B 163 Model Statistics    SOLVE warehouse_facility_problem Using MIP From line 58
+B 179 Solution Report     SOLVE warehouse_facility_problem Using MIP From line 58
+F 217 obj
+F 225 demand_satifiscation
+F 234 suppy_faciliaty
+F 242 storage_capacity
+G 245 z
+G 249 x
+G 266 y
+B 281 E x e c u t i o n
+I 282 x
+I 292 y
+I 298 z

@@ -1,0 +1,235 @@
+GAMS 25.1.2  r67455 Released Aug  1, 2018 DEX-DEG x86 64bit/Mac OS X - 09/12/18 17:31:44 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  set i nodes /1*6/;
+   2  alias (i, j);
+   3   
+   4  parameter u(i,j) link capacity /
+   5  1. 2   5
+   6  1. 3   10
+   7  2. 4   4
+   8  2. 5   5
+   9  3. 4   5
+  10  3. 5   5
+  11  4. 6   8
+  12  5. 6   10
+  13  6. 1   100
+  14  /;
+  15   
+  16  variable z;
+  17  positive variable x(i,j);
+  18   
+  19  equations
+  20  obj                              define objective function
+  21  flow_blance_on_node(i)
+  22  link_cap(i,j)
+  23  ;
+  24   
+  25  obj.. z =e= x('6','1');
+  26  flow_blance_on_node(i).. sum(j$(u(i,j)), x(i,j))-sum(j$(u(j,i)), x(j,i))=e= 0;
+  27  link_cap(i,j)$(u(i,j)>0.1).. x(i,j)=l=u(i,j);
+  28   
+  29  Model maximal_flow_problem /all/ ;
+  30   
+  31  solve maximal_flow_problem using LP maximizing z;
+  32   
+  33  display x.l;
+  34  display z.l;
+
+
+COMPILATION TIME     =        0.001 SECONDS      3 MB  25.1.2 r67455 DEX-DEG
+GAMS 25.1.2  r67455 Released Aug  1, 2018 DEX-DEG x86 64bit/Mac OS X - 09/12/18 17:31:44 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE maximal_flow_problem Using LP From line 31
+
+
+---- obj  =E=  define objective function
+
+obj..  z - x(6,1) =E= 0 ; (LHS = 0)
+     
+
+---- flow_blance_on_node  =E=  
+
+flow_blance_on_node(1)..  x(1,2) + x(1,3) - x(6,1) =E= 0 ; (LHS = 0)
+     
+flow_blance_on_node(2)..  - x(1,2) + x(2,4) + x(2,5) =E= 0 ; (LHS = 0)
+     
+flow_blance_on_node(3)..  - x(1,3) + x(3,4) + x(3,5) =E= 0 ; (LHS = 0)
+     
+REMAINING 3 ENTRIES SKIPPED
+
+
+---- link_cap  =L=  
+
+link_cap(1,2)..  x(1,2) =L= 5 ; (LHS = 0)
+     
+link_cap(1,3)..  x(1,3) =L= 10 ; (LHS = 0)
+     
+link_cap(2,4)..  x(2,4) =L= 4 ; (LHS = 0)
+     
+REMAINING 6 ENTRIES SKIPPED
+
+GAMS 25.1.2  r67455 Released Aug  1, 2018 DEX-DEG x86 64bit/Mac OS X - 09/12/18 17:31:44 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE maximal_flow_problem Using LP From line 31
+
+
+---- z  
+
+z
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       obj
+
+
+---- x  
+
+x(1,2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       flow_blance_on_node(1)
+       -1       flow_blance_on_node(2)
+        1       link_cap(1,2)
+
+x(1,3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       flow_blance_on_node(1)
+       -1       flow_blance_on_node(3)
+        1       link_cap(1,3)
+
+x(2,4)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       flow_blance_on_node(2)
+       -1       flow_blance_on_node(4)
+        1       link_cap(2,4)
+
+REMAINING 6 ENTRIES SKIPPED
+GAMS 25.1.2  r67455 Released Aug  1, 2018 DEX-DEG x86 64bit/Mac OS X - 09/12/18 17:31:44 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE maximal_flow_problem Using LP From line 31
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           3     SINGLE EQUATIONS           16
+BLOCKS OF VARIABLES           2     SINGLE VARIABLES           10
+NON ZERO ELEMENTS            29
+
+
+GENERATION TIME      =        0.007 SECONDS      4 MB  25.1.2 r67455 DEX-DEG
+
+
+EXECUTION TIME       =        0.007 SECONDS      4 MB  25.1.2 r67455 DEX-DEG
+GAMS 25.1.2  r67455 Released Aug  1, 2018 DEX-DEG x86 64bit/Mac OS X - 09/12/18 17:31:44 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE maximal_flow_problem Using LP From line 31
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   maximal_flow_problem   OBJECTIVE  z
+     TYPE    LP                     DIRECTION  MAXIMIZE
+     SOLVER  CPLEX                  FROM LINE  31
+
+**** SOLVER STATUS     1 Normal Completion         
+**** MODEL STATUS      1 Optimal                   
+**** OBJECTIVE VALUE               15.0000
+
+ RESOURCE USAGE, LIMIT          0.015      1000.000
+ ITERATION COUNT, LIMIT         1    2000000000
+
+IBM ILOG CPLEX   25.1.2 r67455 Released Aug  1, 2018 DEG x86 64bit/Mac OS X   
+Cplex 12.8.0.0
+
+Space for names approximately 0.00 Mb
+Use option 'names no' to turn use of names off
+LP status(1): optimal
+Cplex Time: 0.00sec (det. 0.02 ticks)
+Optimal solution found.
+Objective :          15.000000
+
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU obj                 .              .              .             1.0000      
+
+  obj  define objective function
+
+---- EQU flow_blance_on_node  
+
+         LOWER          LEVEL          UPPER         MARGINAL
+
+1          .              .              .            -1.0000      
+2          .              .              .             EPS         
+3          .              .              .            -1.0000      
+4          .              .              .             EPS         
+5          .              .              .             EPS         
+6          .              .              .              .          
+
+---- EQU link_cap  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+1.2        -INF            5.0000         5.0000         1.0000      
+1.3        -INF           10.0000        10.0000          .          
+2.4        -INF            3.0000         4.0000          .          
+2.5        -INF            2.0000         5.0000          .          
+3.4        -INF            5.0000         5.0000         1.0000      
+3.5        -INF            5.0000         5.0000         1.0000      
+4.6        -INF            8.0000         8.0000         EPS         
+5.6        -INF            7.0000        10.0000          .          
+6.1        -INF           15.0000       100.0000          .          
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR z                 -INF           15.0000        +INF             .          
+
+---- VAR x  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+1.2          .             5.0000        +INF             .          
+1.3          .            10.0000        +INF             .          
+2.4          .             3.0000        +INF             .          
+2.5          .             2.0000        +INF             .          
+3.4          .             5.0000        +INF             .          
+3.5          .             5.0000        +INF             .          
+4.6          .             8.0000        +INF             .          
+5.6          .             7.0000        +INF             .          
+6.1          .            15.0000        +INF             .          
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 25.1.2  r67455 Released Aug  1, 2018 DEX-DEG x86 64bit/Mac OS X - 09/12/18 17:31:44 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
+
+
+----     33 VARIABLE x.L  
+
+            1           2           3           4           5           6
+
+1                   5.000      10.000
+2                                           3.000       2.000
+3                                           5.000       5.000
+4                                                                   8.000
+5                                                                   7.000
+6      15.000
+
+
+----     34 VARIABLE z.L                   =       15.000  
+
+
+EXECUTION TIME       =        0.002 SECONDS      3 MB  25.1.2 r67455 DEX-DEG
+
+
+USER: GAMS Development Corporation, USA              G871201/0000CA-ANY
+      Free Demo, +1 202-342-0180, support@gams.com, www.gams.com DC0000
+
+
+**** FILE SUMMARY
+
+Input      /Users/river/Desktop/maximum_problem.gms
+Output     /Users/river/Desktop/maximum_problem.lst

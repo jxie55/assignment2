@@ -1,0 +1,18 @@
+B 2 C o m p i l a t i o n
+B 30 Equation Listing    SOLVE linear_programming Using MIP From line 17
+D 31 obj
+D 37 constraint1
+D 42 constraint2
+B 49 Column Listing      SOLVE linear_programming Using MIP From line 17
+E 50 z
+E 58 x
+B 79 Model Statistics    SOLVE linear_programming Using MIP From line 17
+B 95 Solution Report     SOLVE linear_programming Using MIP From line 17
+F 133 obj
+F 134 constraint1
+F 135 constraint2
+G 136 z
+G 140 x
+B 154 E x e c u t i o n
+I 155 x
+I 162 z
